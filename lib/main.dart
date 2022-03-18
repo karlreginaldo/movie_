@@ -1,12 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/features/presentation/cubit/movie_carousel_cubit.dart';
 import 'core/themes/app_color.dart';
 import 'core/themes/theme_text.dart';
 import 'dipendency_indection.dart' as getit;
-import 'dipendency_indection.dart';
 import 'features/presentation/pages/home_screen.dart';
 
 void main() async {
@@ -29,10 +26,7 @@ class MovieApp extends StatelessWidget {
         textTheme: ThemeText.getTextTheme(),
         appBarTheme: const AppBarTheme(elevation: 0),
       ),
-      home: BlocProvider<MovieCarouselCubit>(
-        create: (context) => sl<MovieCarouselCubit>()..getTrending(),
-        child: HomeScreen(),
-      ),
+      home: HomeScreen(),
     );
   }
 }

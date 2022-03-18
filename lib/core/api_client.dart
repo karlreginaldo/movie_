@@ -9,7 +9,7 @@ class ApiClient {
 
   ApiClient(this._client);
 
-  dynamic get(String path) async {
+  Future<Map<String, dynamic>> get(String path) async {
     final response = await _client.get(
         Uri.parse(
             '${ApiConstants.BASE_URL}$path?api_key=${ApiConstants.API_KEY}'),

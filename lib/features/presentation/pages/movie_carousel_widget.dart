@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:movie_app/features/domain/entities/movie_entity.dart';
-import 'package:movie_app/features/presentation/widgets/movie_app_bar.dart';
 
 import 'movie_page_view.dart';
 
@@ -15,7 +14,6 @@ class MovieCarouselWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        MovieAppBar(),
         MoviePageView(
           movies: movies,
           initialPage: defaultIndex,
