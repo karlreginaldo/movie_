@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:movie_app/features/presentation/bloc/movie_carousel_bloc.dart';
+import 'package:movie_app/features/presentation/movie_carousel_cubit/movie_carousel_cubit.dart';
 import 'package:movie_app/features/presentation/pages/movie_carousel_widget.dart';
 
 import '../../../dipendency_indection.dart';
@@ -13,12 +13,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  late MovieCarouselBloc movieCarouselBloc;
+  late MovieCarouselCubit movieCarouselBloc;
 
   @override
   void initState() {
-    movieCarouselBloc = sl<MovieCarouselBloc>();
-    movieCarouselBloc.add(CarouselLoadEvent());
+    movieCarouselBloc = sl<MovieCarouselCubit>();
+    movieCarouselBloc.getTrending();
     super.initState();
   }
 
@@ -30,13 +30,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<MovieCarouselBloc>(
+    return BlocProvider<MovieCarouselCubit>(
       create: (context) => movieCarouselBloc,
       child: Scaffold(
-        body: BlocBuilder<MovieCarouselBloc, MovieCarouselState>(
+        appBar: AppBar(backgroundColor: Colors.white),
+        body: BlocBuilder<MovieCarouselCubit, MovieCarouselState>(
           bloc: movieCarouselBloc,
           builder: (context, state) {
             if (state is MovieCarouselLoaded) {
+              print(state.movies);
               return Stack(
                 fit: StackFit.expand,
                 children: [
@@ -54,7 +56,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               );
             } else if (state is MovieCarouselLoading) {
-              return Container();
+              return Container(
+                child: Center(child: CircularProgressIndicator()),
+              );
             }
             return const SizedBox.shrink();
           },

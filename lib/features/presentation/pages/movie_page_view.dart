@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movie_app/core/utils/size_extension.dart';
 import 'package:movie_app/features/domain/entities/movie_entity.dart';
 import 'package:movie_app/features/presentation/widgets/movie_card_widget.dart';
-
-import '../../../core/constants/size_constants.dart';
-import '../../../core/utils/screen_utils.dart';
 
 class MoviePageView extends StatefulWidget {
   final List<MovieEntity> movies;
@@ -38,8 +34,8 @@ class _MoviePageViewState extends State<MoviePageView> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: Sizes.dimen_10.h),
-      height: ScreenUtil.screenHeight * 0.35,
+      margin: EdgeInsets.all(8),
+      height: 300,
       child: PageView.builder(
         controller: _pageController,
         itemBuilder: (context, index) {

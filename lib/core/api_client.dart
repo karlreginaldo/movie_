@@ -14,8 +14,12 @@ class ApiClient {
         Uri.parse(
             '${ApiConstants.BASE_URL}$path?api_key=${ApiConstants.API_KEY}'),
         headers: {'Content-Type': 'application/json'});
+
+    print('Eto body ${response.body}');
     if (response.statusCode == 200) {
-      return jsonDecode(response.body);
+      final json = jsonDecode(response.body);
+      print('Eto parsed body $json');
+      return json;
     } else {
       throw Exception(response.reasonPhrase);
     }
